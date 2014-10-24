@@ -1,0 +1,6 @@
+name = Country View
+description = A simple module that exposes the Country module's entities as a page.
+package = Other
+core = 7.x
+
+dependencies[] = countries

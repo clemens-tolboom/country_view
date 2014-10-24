@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function countryview_menu() {
+  $items['country/%country'] = array(
+    'title callback' => 'countries_page_title',
+    'title arguments' => array(1),
+    'description' => 'View a country.',
+    'page callback' => 'countryview_view',
+    'page arguments' => array(1),
+    'access callback' => 'countryview_view_access',
+    'access arguments' => array(1),
+  );
+  return $items;
+}
+
+
+/**
+ * Menu callback to view a country.
+ */
+function countryview_view($country) {
+  return entity_view('country', array($country->iso2 => $country), 'full', NULL, TRUE);
+}
+
+/**
+ * Implements hook_permission().
+ */
+function countryview_permission() {
+  return array(
+    'view country pages' =>  array(
+      'title' => t('View country pages'),
+      'description' => t('Lets users view non-administrative country pages.'),
+    ),
+  );
+}
+
+/**
+ * Menu access callback.
+ *
+ * @param object $country
+ * @return boolean
+ */
+function countryview_view_access($country) {
+  if ($country->enabled || user_access('administer site configuration')) {
+    return user_access('view country pages');
+  }
+  return FALSE;
+}
