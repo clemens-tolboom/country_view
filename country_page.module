@@ -48,3 +48,31 @@ function country_page_view_access($country) {
   }
   return FALSE;
 }
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function countryview_field_formatter_info() {
+  return array(
+    'countryview_link' => array(
+      'label' => t('Link to country page'),
+      'field types' => array('country'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function countryview_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  switch ($display['type']) {
+    case 'countryview_link':
+      foreach($items as $delta => $item) {
+        $element[$delta] = array('#markup' => l($item['country']->name, 'country/' . $item['iso2']));
+      }
+  }
+
+  return $element;
+}
