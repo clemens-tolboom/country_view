@@ -52,9 +52,9 @@ function country_page_view_access($country) {
 /**
  * Implements hook_field_formatter_info().
  */
-function countryview_field_formatter_info() {
+function country_page_field_formatter_info() {
   return array(
-    'countryview_link' => array(
+    'country_page_link' => array(
       'label' => t('Link to country page'),
       'field types' => array('country'),
     ),
@@ -64,11 +64,11 @@ function countryview_field_formatter_info() {
 /**
  * Implements hook_field_formatter_view().
  */
-function countryview_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+function country_page_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
   $element = array();
 
   switch ($display['type']) {
-    case 'countryview_link':
+    case 'country_page_link':
       foreach($items as $delta => $item) {
         $element[$delta] = array('#markup' => l($item['country']->name, 'country/' . $item['iso2']));
       }
