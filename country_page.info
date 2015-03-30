@@ -1,4 +1,4 @@
-name = Country View
+name = Country Page
 description = A simple module that exposes the Country module's entities as a page.
 package = Other
 core = 7.x
