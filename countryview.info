@@ -3,4 +3,4 @@ description = A simple module that exposes the Country module's entities as a pa
 package = Other
 core = 7.x
 
-dependencies[] = countries
+dependencies[] = countries (>=7.x-2.x)
